@@ -10,3 +10,20 @@
 <main>
   <Main/>
 </main>
+
+<style>
+  aside {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: #ffffff11;
+    backdrop-filter: blur(6px);
+    box-shadow: var(--shadow-6);
+    overflow-y: scroll;
+    z-index: 9999;
+  }
+
+  main {
+    height: 100vh;
+  }
+</style>

@@ -1,0 +1,14 @@
+/* Write your global styles here, in PostCSS syntax */
+@import "open-props/style";
+@import "open-props/normalize";
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}

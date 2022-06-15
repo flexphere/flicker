@@ -11,3 +11,10 @@
 
 <!-- svelte-ignore a11y-media-has-caption -->
 <video use:actionFunc autoplay></video>
+
+<style>
+  video {
+    width: 100%;
+    height: 100%;
+  }
+</style>
