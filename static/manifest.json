@@ -1,6 +1,6 @@
 {
   "short_name": "flicker",
-  "name": "flicker",
+  "name": "Flicker",
   "start_url": "/",
   "icons": [
     {
@@ -9,10 +9,11 @@
       "sizes": "512x512"
     }
   ],
-  "background_color": "#3367D6",
+  "background_color": "#1a1c1d",
   "display": "standalone",
+  "display_override": ["window-controls-overlay"],
   "scope": "/",
-  "theme_color": "#3367D6",
+  "theme_color": "#1a1c1d",
   "shortcuts": [],
   "description": "flicker is not a photo storage nor sharing platform."
 }
