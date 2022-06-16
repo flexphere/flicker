@@ -20,6 +20,15 @@
   function activate(stream:MediaStream) {
     activeStream.set(stream);
   }
+  function remove(stream:MediaStream){
+    let streamID = stream.id;
+    stream.getTracks().forEach(t => t.stop());
+    stream.getTracks().forEach(t => stream.removeTrack(t));
+    streams.set($streams.filter(s => s.id != streamID));
+    if($streams.length){
+      activate($streams[0]);
+    }
+  }
 </script>
 
 <div class="container">
@@ -27,7 +36,7 @@
     <!-- svelte-ignore a11y-media-has-caption -->
     <div class="thumbails" style="position: relative; flex-shrink:1">
       <video use:ContentLoaded on:click={()=>{activate(stream)}} data-id="{stream.id}" autoplay></video>
-      <div class="close">x</div>
+      <div class="close" on:click={()=>{remove(stream)}}>x</div>
     </div>
   {/each}
   <div class="action">
@@ -82,6 +91,11 @@
   }
 
   video:hover + .close {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 9999;
+  }
+  .close:hover{
     opacity: 1;
     pointer-events: auto;
     z-index: 9999;
