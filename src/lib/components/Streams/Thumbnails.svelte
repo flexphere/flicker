@@ -34,8 +34,8 @@
 <div class="container">
   {#each $streams as stream}
     <!-- svelte-ignore a11y-media-has-caption -->
-    <div class="thumbails" style="position: relative; flex-shrink:1">
-      <video use:ContentLoaded on:click={()=>{activate(stream)}} data-id="{stream.id}" autoplay></video>
+    <div style="position: relative; flex-shrink:1">
+      <video use:ContentLoaded on:click={()=>{activate(stream)}} class:active={stream.id == $activeStream.id} data-id="{stream.id}" autoplay></video>
       <div class="close" on:click={()=>{remove(stream)}}>&times;</div>
     </div>
   {/each}
@@ -55,17 +55,13 @@
     padding-right: var(--size-8);
   }
 
-  .thumbnails {
-    position: relative;
-    flex-shrink: 1;
-  }
-
   video {
     width: 100%;
     max-height: var(--size-10);
-    border: solid var(--border-size-2) var(--thumbnail-bg);
+    border: solid var(--border-size-1) var(--thumbnail-bg);
     border-radius: var(--radius-2);
-    box-shadow: var(--shadow-2);
+    box-shadow: var(--shadow-3);
+    cursor: pointer;
     transition: all .3s;
   }
   video + .close {
@@ -82,11 +78,14 @@
     transform: translate(-50%, -50%);
     pointer-events: none;
     cursor: pointer;
-    transition: all .3s;
+    transition: all .5s;
   }
-  
+
+ 
+  video.active,
   video:hover {
     border-color: var(--thumbnail-border);
+    box-shadow: var(--shadow-6);
   }
 
   video:hover + .close {

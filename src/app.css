@@ -8,7 +8,7 @@ html {
   --thumbnail-border: var(--blue-9);
   @media (--OSdark) {
     --thumbnail-bg: #ffffff11;
-    --thumbnail-border: var(--blue-1);
+    --thumbnail-border: var(--blue-6);
   }
 }
 
