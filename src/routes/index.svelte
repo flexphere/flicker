@@ -1,10 +1,9 @@
 <script lang="ts">
-import { onMount } from 'svelte';
-
+  import { streams, activeStream, activateStream, addStream } from '$lib/components/Streams/store';
   import {writable} from 'svelte/store';
+  import { onMount } from 'svelte';
   import Main from "../lib/components/Streams/Main.svelte";
   import Thumbnails from "../lib/components/Streams/Thumbnails.svelte";
-
 
   const hideThumbnails = writable<boolean>(false);
 
@@ -12,7 +11,30 @@ import { onMount } from 'svelte';
     document.addEventListener('keydown', (e)=>{
       if (e.key === "Escape") {
         hideThumbnails.set(!$hideThumbnails);
+        return
       }
+
+      if (e.metaKey && e.shiftKey && e.key === "ArrowRight") {
+        const activeIndex = $streams.findIndex(s => s.id == $activeStream.id)
+        if (activeIndex < $streams.length - 1) {
+          activateStream($streams[activeIndex + 1])
+        }
+        return
+      }
+
+      if (e.metaKey && e.shiftKey && e.key === "ArrowLeft") {
+        const activeIndex = $streams.findIndex(s => s.id == $activeStream.id)
+        if (activeIndex > 0) {
+          activateStream($streams[activeIndex - 1])
+        }
+        return
+      }
+
+      if (e.metaKey && e.shiftKey && e.key.toLowerCase() === "s") {
+        addStream();
+        return
+      }
+
     })
   })
 </script>

@@ -1,32 +1,10 @@
 <script lang="ts">
-  import {activeStream, streams} from './store'
+  import {activeStream, streams, addStream, activateStream, removeStream} from './store'
 
   function ContentLoaded(el:HTMLVideoElement) {
     const stream = $streams.find(s => s.id == el.getAttribute("data-id"))
     if (stream) {
       el.srcObject = stream;
-    }
-  }
-
-  async function addStream() {
-    const stream = await navigator.mediaDevices.getDisplayMedia({audio:false,video:true});
-    if (stream) {
-      console.log(stream.getTracks()[0].getConstraints())
-      streams.set([...$streams, stream]);
-      activeStream.set(stream);
-    }
-  }
-
-  function activate(stream:MediaStream) {
-    activeStream.set(stream);
-  }
-  function remove(stream:MediaStream){
-    let streamID = stream.id;
-    stream.getTracks().forEach(t => t.stop());
-    stream.getTracks().forEach(t => stream.removeTrack(t));
-    streams.set($streams.filter(s => s.id != streamID));
-    if($streams.length){
-      activate($streams[0]);
     }
   }
 </script>
@@ -35,8 +13,8 @@
   {#each $streams as stream}
     <!-- svelte-ignore a11y-media-has-caption -->
     <div style="position: relative; flex-shrink:1">
-      <video use:ContentLoaded on:click={()=>{activate(stream)}} class:active={stream.id == $activeStream.id} data-id="{stream.id}" autoplay></video>
-      <div class="close" on:click={()=>{remove(stream)}}>&times;</div>
+      <video use:ContentLoaded on:click={()=>{activateStream(stream)}} class:active={stream.id == $activeStream.id} data-id="{stream.id}" autoplay></video>
+      <div class="close" on:click={()=>{removeStream(stream)}}>&times;</div>
     </div>
   {/each}
   <div class="action">
