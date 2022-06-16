@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {activeStream} from './store';
+  import {activeStream, streams} from './store';
   
   function actionFunc(el:HTMLVideoElement) {
     activeStream.subscribe((stream)=>{
@@ -10,7 +10,7 @@
 </script>
 
 <div>
-{#if $activeStream}
+{#if $streams.length && $activeStream}
 <!-- svelte-ignore a11y-media-has-caption -->
 <video use:actionFunc autoplay></video>
 {/if}
