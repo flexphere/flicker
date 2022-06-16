@@ -7,37 +7,29 @@
 
   const hideThumbnails = writable<boolean>(false);
 
-  onMount(()=>{
-    document.addEventListener('keydown', (e)=>{
-      if (e.key === "Escape") {
-        hideThumbnails.set(!$hideThumbnails);
-        return
+  function shortcuts(e:KeyboardEvent) {
+    if (e.key === "Escape") {
+      hideThumbnails.set(!$hideThumbnails);
+    }
+    else if (e.metaKey && e.key === "ArrowRight") {
+      const activeIndex = $streams.findIndex(s => s.id == $activeStream.id)
+      if (activeIndex < $streams.length - 1) {
+        activateStream($streams[activeIndex + 1])
       }
-
-      if (e.metaKey && e.shiftKey && e.key === "ArrowRight") {
-        const activeIndex = $streams.findIndex(s => s.id == $activeStream.id)
-        if (activeIndex < $streams.length - 1) {
-          activateStream($streams[activeIndex + 1])
-        }
-        return
+    }
+    else if (e.metaKey && e.key === "ArrowLeft") {
+      const activeIndex = $streams.findIndex(s => s.id == $activeStream.id)
+      if (activeIndex > 0) {
+        activateStream($streams[activeIndex - 1])
       }
-
-      if (e.metaKey && e.shiftKey && e.key === "ArrowLeft") {
-        const activeIndex = $streams.findIndex(s => s.id == $activeStream.id)
-        if (activeIndex > 0) {
-          activateStream($streams[activeIndex - 1])
-        }
-        return
-      }
-
-      if (e.metaKey && e.shiftKey && e.key.toLowerCase() === "s") {
-        addStream();
-        return
-      }
-
-    })
-  })
+    }
+    else if (e.metaKey && e.key.toLowerCase() === "s") {
+      addStream();
+    }
+  }
 </script>
+
+<svelte:window on:keydown|preventDefault={shortcuts} />
 
 <main>
   <Main/>
