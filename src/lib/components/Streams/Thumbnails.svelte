@@ -63,7 +63,7 @@
   video {
     width: 100%;
     max-height: var(--size-10);
-    border: solid var(--border-size-1) var(--gray-9);
+    border: solid var(--border-size-2) var(--thumbnail-bg);
     border-radius: var(--radius-2);
     box-shadow: var(--shadow-2);
     transition: all .3s;
@@ -86,10 +86,11 @@
   }
   
   video:hover {
-    border-color: var(--gray-6);
+    border-color: var(--thumbnail-border);
   }
 
   video:hover + .close {
+    color: var(--gray-0);
     opacity: 1;
     pointer-events: auto;
     z-index: 9999;
@@ -107,6 +108,7 @@
     width: var(--size-8);
     height: 100%;
     background: var(--blue-9);
+    color: var(--gray-0);
     transition: all .3s;
   }
   button:hover {

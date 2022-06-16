@@ -30,7 +30,7 @@ import { onMount } from 'svelte';
     position: absolute;
     bottom: 0;
     width: 100%;
-    background: #ffffff11;
+    background: var(--thumbnail-bg);
     backdrop-filter: blur(6px);
     box-shadow: var(--shadow-6);
     overflow-y: scroll;
