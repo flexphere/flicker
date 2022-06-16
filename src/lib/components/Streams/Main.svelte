@@ -9,10 +9,18 @@
   };
 </script>
 
+<div>
+{#if $activeStream}
 <!-- svelte-ignore a11y-media-has-caption -->
 <video use:actionFunc autoplay></video>
+{/if}
+</div>
 
 <style>
+  div {
+    height: 100%;
+    background: url('/logo.png') no-repeat center center;
+  }
   video {
     width: 100%;
     height: 100%;

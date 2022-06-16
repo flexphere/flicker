@@ -4,7 +4,7 @@
   "start_url": "/",
   "icons": [
     {
-      "src": "flicker.png",
+      "src": "logo.png",
       "type": "image/png",
       "sizes": "512x512"
     }

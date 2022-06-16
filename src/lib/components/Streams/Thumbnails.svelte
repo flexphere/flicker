@@ -62,8 +62,7 @@
 
   video {
     width: 100%;
-    max-width: var(--size-11);
-    /* margin: var(--size-3); */
+    max-height: var(--size-10);
     border: solid var(--border-size-1) var(--gray-9);
     border-radius: var(--radius-2);
     box-shadow: var(--shadow-2);
