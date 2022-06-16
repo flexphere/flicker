@@ -9,27 +9,31 @@
 
   function shortcuts(e:KeyboardEvent) {
     if (e.key === "Escape") {
+      e.preventDefault();
       hideThumbnails.set(!$hideThumbnails);
     }
     else if (e.metaKey && e.key === "ArrowRight") {
+      e.preventDefault();
       const activeIndex = $streams.findIndex(s => s.id == $activeStream.id)
       if (activeIndex < $streams.length - 1) {
         activateStream($streams[activeIndex + 1])
       }
     }
     else if (e.metaKey && e.key === "ArrowLeft") {
+      e.preventDefault();
       const activeIndex = $streams.findIndex(s => s.id == $activeStream.id)
       if (activeIndex > 0) {
         activateStream($streams[activeIndex - 1])
       }
     }
     else if (e.metaKey && e.key.toLowerCase() === "s") {
+      e.preventDefault();
       addStream();
     }
   }
 </script>
 
-<svelte:window on:keydown|preventDefault={shortcuts} />
+<svelte:window on:keydown={shortcuts} />
 
 <main>
   <Main/>
