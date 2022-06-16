@@ -36,7 +36,7 @@
     <!-- svelte-ignore a11y-media-has-caption -->
     <div class="thumbails" style="position: relative; flex-shrink:1">
       <video use:ContentLoaded on:click={()=>{activate(stream)}} data-id="{stream.id}" autoplay></video>
-      <div class="close" on:click={()=>{remove(stream)}}>x</div>
+      <div class="close" on:click={()=>{remove(stream)}}>&times;</div>
     </div>
   {/each}
   <div class="action">
@@ -76,13 +76,13 @@
     width: var(--size-3);
     height: var(--size-3);
     opacity: 0;
-    background: var(--gray-0);
+    background: var(--red-7);
     border-radius: var(--radius-round);
-    color: var(--gray-9);
     font-size: var(--font-size-00);
     text-align: center;
     transform: translate(-50%, -50%);
     pointer-events: none;
+    cursor: pointer;
     transition: all .3s;
   }
   
