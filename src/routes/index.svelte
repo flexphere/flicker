@@ -1,55 +1,50 @@
 <script lang="ts">
+import { onMount } from 'svelte';
 
-  async function getMedia(audio: boolean, video:boolean) {
-    let captureStream:MediaStream;
-  
-    try {
-      captureStream = await navigator.mediaDevices.getDisplayMedia({audio,video});
-    } catch(err) {
-      throw err;
-    }
-  
-    return captureStream;
+  import {writable} from 'svelte/store';
+  import Main from "../lib/components/Streams/Main.svelte";
+  import Thumbnails from "../lib/components/Streams/Thumbnails.svelte";
+
+
+  const hideThumbnails = writable<boolean>(false);
+
+  onMount(()=>{
+    document.addEventListener('keydown', (e)=>{
+      if (e.key === "Escape") {
+        hideThumbnails.set(!$hideThumbnails);
+      }
+    })
+  })
+</script>
+
+<main>
+  <Main/>
+</main>
+
+<aside class:hide={$hideThumbnails}>
+  <Thumbnails/>
+</aside>
+
+<style>
+  aside {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: #ffffff11;
+    backdrop-filter: blur(6px);
+    box-shadow: var(--shadow-6);
+    overflow-y: scroll;
+    z-index: 9999;
+    transition: all .3s;
+  }
+
+  aside.hide {
+    transform: translateY(100%);
   }
 
 
-  let medias:HTMLVideoElement[] = [];
-  
-  async function addMedia() {
-    getMedia(false, true).then(stream => {
-      const video = document.createElement('video');
-      video.srcObject = stream;
-      video.autoplay = true;
-      video.playsInline = true;
-      medias.push(video);
-    });
+
+  main {
+    height: 100vh;
   }
-
-
-  (async()=>{
-    const video1 = document.getElementById('videoElement1');
-    console.log(video1)
-    const video2 = document.getElementById('videoElement2');
-    console.log(video2)
-    const stream = await getMedia({audio:false,video:true});
-    console.log(stream)
-    video1.srcObject = stream;
-  
-    const stream2 = await startCapture({audio:true,video:true});
-    console.log(stream2)
-    video2.srcObject = stream2;
-  
-  })();
-  </script>
-  
-
-  <button on:click={addMedia}>add Media</button>
-  
-  {{medias}}
-
-  {#each medias as media}
-
-  {/each}
-  
-  <video id="videoElement1" controls autoplay></video>
-  <video id="videoElement2" controls autoplay></video>
+</style>
