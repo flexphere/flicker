@@ -13,6 +13,7 @@ const config = {
 	],
 
 	kit: {
+		version: '0.0.1',
 		adapter: adapter()
 		// vite: {
 		// 	resolve: {
